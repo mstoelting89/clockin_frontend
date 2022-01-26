@@ -4,7 +4,7 @@
     Nachname: <input type="text" id="lastName">
     Email: <input type="text" id="email">
     Passwort: <input type="password" id="password">
-    <input type="button" id="send" @click="testMethodToClick()" value="Abschicken">
+    <input type="button" id="send" @click="register()" value="Abschicken">
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     ...mapActions([
-        'testMethodToClick'
+        'register'
     ])
   }
 }
