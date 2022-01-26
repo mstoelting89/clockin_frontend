@@ -3,6 +3,8 @@
     Email: <input type="text" id="email">
     Passwort: <input type="password" id="password">
     <input type="button" id="send" @click="login()" value="Abschicken">
+    <input type="button" id="getData" @click="getDataFromSpring()" value="Daten ziehen">
+
   </div>
 </template>
 
@@ -13,7 +15,8 @@ export default {
   name: "Login",
   methods: {
     ...mapActions([
-        'login'
+        'login',
+        'getDataFromSpring'
     ])
   }
 }
