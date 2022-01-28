@@ -1,11 +1,12 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/register">Registrieren</router-link>
-    <router-link to="/login">Login</router-link>
+  <div class="landing-page">
+    <router-view />
   </div>
-  <router-view/>
+
 </template>
+<script>
+
+</script>
 
 <style>
 </style>

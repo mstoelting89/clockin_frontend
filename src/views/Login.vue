@@ -1,27 +1,56 @@
 <template>
   <div class="login">
-    Email: <input type="text" id="email">
-    Passwort: <input type="password" id="password">
-    <input type="button" id="send" @click="login()" value="Abschicken">
-    <input type="button" id="getData" @click="getDataFromSpring()" value="Daten ziehen">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col">
+          <form>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Adresse</label>
+              <input type="email" class="form-control" id="email" v-model="emailValue">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Passwort</label>
+              <input type="password" class="form-control" id="password" v-model="passwordValue">
+            </div>
+            <div class="mb-3">
+              <input type="button" class="btn btn-primary" id="send" @click="signIn(emailValue, passwordValue)" value="Login">
+              <a href="#">Passwort vergessen</a>
+            </div>
+
+          </form>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+
+    </div>
 
   </div>
 </template>
 
 <script>
-import {mapActions} from "vuex";
 
 export default {
   name: "Login",
+  data() {
+    return {
+      emailValue: '',
+      passwordValue: ''
+    }
+  },
   methods: {
-    ...mapActions([
-        'login',
-        'getDataFromSpring'
-    ])
+    signIn(email, password) {
+      this.$store
+          .dispatch("login", {email, password})
+          .then(() => {
+            this.$router.push('/loginarea');
+          })
+    }
   }
 }
 </script>
 
 <style scoped>
-
 </style>

@@ -1,47 +1,55 @@
 import axios from 'axios'
 
 const state = {
-
+    token: null,
+    register: false
 }
 
 const mutations = {
-
+    SET_TOKEN (state, token) {
+        state.token = token;
+    },
+    REGISTER (state) {
+        state.register = true
+    }
 }
 
 const actions = {
     testMethod() {
         console.log("Foo Bar");
     },
-    register() {
-        const data = {
-            "firstName": "Test",
-            "lastName": "Tester",
-            "email": "test.tester@test.de",
-            "password": "password"
-        }
+    register({commit}, data) {
 
         const header = {
             "Content-Type": "application/json",
             "Accept": "*/*"
         }
 
-        axios.post("http://localhost:8886/api/v1/registration", data, header);
+        commit('REGISTER');
+        return axios.post("http://localhost:8886/api/v1/registration", data, header);
     },
-    login() {
-        const data = {
-            "email": "michaelstoelting@gmail.com",
-            "password": "Test1234"
-        }
+    login({ commit }, data) {
 
         const header = {
             "Content-Type": "application/json",
             "Accept": "*/*"
         }
 
-        axios.post("http://localhost:8886/api/v1/login", data, header);
+        return axios.post("http://localhost:8886/api/v1/login", data, header)
+            .then((response) => {
+                localStorage.setItem('token', response.data.token);
+                commit('SET_TOKEN', response.data.token);
+            });
+
+    },
+    logout() {
+        return new Promise((resolve) => {
+            localStorage.removeItem('token');
+            resolve();
+        });
     },
     getDataFromSpring() {
-        let token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWNoYWVsc3RvZWx0aW5nQGdtYWlsLmNvbSIsImV4cCI6MTY0OTI1MDI3NSwiaWF0IjoxNjQzMjAyMjc1fQ.XixG2APpHocgXtuzUrFOyvikI7cooiIBQKiKmrX0kkHzNwnG4VcHLR_iVkne1nROf1C1CEuU-fgAaSDkaYjUNw";
+        let token = localStorage.getItem('token');
         let data = {};
 
         axios.post("http://localhost:8886/api/v1/testendpoint", data, {
