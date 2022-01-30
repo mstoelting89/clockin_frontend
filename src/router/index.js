@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Register from "@/views/Register";
 import Login from "@/views/Login";
-import AfterLogin from "@/views/AfterLogin";
+import LoginArea from "@/views/LoginArea";
 
 const routes = [
   {
@@ -23,7 +23,7 @@ const routes = [
   {
     path: '/loginarea',
     name: 'LoginArea',
-    component: AfterLogin
+    component: LoginArea
   }
 ]
 

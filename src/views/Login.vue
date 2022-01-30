@@ -5,6 +5,7 @@
         <div class="col">
         </div>
         <div class="col">
+          <h1>Login</h1>
           <form>
             <div class="mb-3">
               <label for="email" class="form-label">Email Adresse</label>
@@ -15,7 +16,7 @@
               <input type="password" class="form-control" id="password" v-model="passwordValue">
             </div>
             <div class="mb-3">
-              <input type="button" class="btn btn-primary" id="send" @click="signIn(emailValue, passwordValue)" value="Login">
+              <input type="button" class="btn btn-primary me-5" id="send" @click="signIn(emailValue, passwordValue)" value="Login">
               <a href="#">Passwort vergessen</a>
             </div>
 

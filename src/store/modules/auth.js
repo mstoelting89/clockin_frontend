@@ -2,12 +2,16 @@ import axios from 'axios'
 
 const state = {
     token: null,
-    register: false
+    register: false,
+    loggedIn: false
 }
 
 const mutations = {
     SET_TOKEN (state, token) {
         state.token = token;
+    },
+    LOGGED_IN(state) {
+        state.loggedIn = true
     },
     REGISTER (state) {
         state.register = true
@@ -18,7 +22,7 @@ const actions = {
     testMethod() {
         console.log("Foo Bar");
     },
-    register({commit}, data) {
+    register({ commit }, data) {
 
         const header = {
             "Content-Type": "application/json",
@@ -39,6 +43,7 @@ const actions = {
             .then((response) => {
                 localStorage.setItem('token', response.data.token);
                 commit('SET_TOKEN', response.data.token);
+                commit('LOGGED_IN')
             });
 
     },
@@ -65,7 +70,9 @@ const actions = {
 }
 
 const getters = {
-
+    token: state => state.token,
+    register: state => state.register,
+    loggedIn: state => state.loggedIn
 }
 
 const authModule = {

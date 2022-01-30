@@ -9,7 +9,7 @@
 import LoginStart from "@/components/LoginStart";
 
 export default {
-  name: 'AfterLogin',
+  name: 'LoginArea',
   components: {
     LoginStart
   }
