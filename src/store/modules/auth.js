@@ -19,14 +19,14 @@ const mutations = {
 }
 
 const actions = {
-    testMethod() {
-        console.log("Foo Bar");
+    setLoggedIn( { commit }) {
+        commit('LOGGED_IN');
     },
     register({ commit }, data) {
 
         const header = {
             "Content-Type": "application/json",
-            "Accept": "*/*"
+            "Accept": "*/*",
         }
 
         commit('REGISTER');
@@ -36,7 +36,7 @@ const actions = {
 
         const header = {
             "Content-Type": "application/json",
-            "Accept": "*/*"
+            "Accept": "*/*",
         }
 
         return axios.post("http://localhost:8886/api/v1/login", data, header)

@@ -10,18 +10,21 @@
           <li class="nav-item">
             <router-link to="/" class="nav-link active">Home</router-link>
           </li>
+          <li class="nav-item" v-if="checkLogin">
+            <router-link to="/loginarea" class="nav-link">Loginarea</router-link>
+          </li>
         </ul>
         <form class="container-fluid justify-content-end d-flex">
-          <button class="btn btn-primary me-3" v-if="!loggedIn">
+          <button class="btn btn-primary me-3" v-if="!checkLogin">
             <router-link to="/register">Registrieren</router-link>
           </button>
           <div class="login-btn" >
-            <button class="btn btn-primary me-3" v-if="!loggedIn">
+            <button class="btn btn-primary me-3"  v-if="!checkLogin">
               <router-link to="/login">Login</router-link>
             </button>
           </div>
           <div class="logout-btn">
-            <button class="btn btn-primary me-3" v-if="loggedIn" @click="logout">
+            <button class="btn btn-primary me-3" @click="logout"  v-if="checkLogin">
               Logout
             </button>
           </div>
@@ -38,10 +41,18 @@ import {mapGetters} from "vuex";
 
 export default {
   name: "Navbar",
+  created() {
+    if (localStorage.getItem('token')) {
+      this.$store.dispatch("setLoggedIn");
+    }
+  },
   computed: {
     ...mapGetters([
         'loggedIn'
-    ])
+    ]),
+    checkLogin() {
+      return this.$store.getters.loggedIn;
+    }
   },
   methods: {
     logout() {
