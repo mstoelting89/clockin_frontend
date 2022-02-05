@@ -1,23 +1,21 @@
 <template>
   <div class="loginArea">
     <h1>Dies ist der Loginbereich</h1>
-    <input type="button" class="btn btn-primary" value="Start">
-    <input type="button" class="btn btn-primary" id="getData" @click="getDataFromSpring()" value="Daten ziehen">
+    <input type="button" class="btn btn-primary" value="Start" @click="startTimeTracking">
+    <input type="button" class="btn btn-primary" value="Ende" @click="endTimeTracking">
   </div>
 </template>
 
 <script>
 
-import {mapActions} from "vuex";
-
 export default {
   name: "LoginStart",
   methods: {
-    ...mapActions([
-      'getDataFromSpring'
-    ]),
     startTimeTracking() {
-
+      this.$store.dispatch('startTimeTracking');
+    },
+    endTimeTracking() {
+      this.$store.dispatch('endTimeTracking');
     }
   }
 }

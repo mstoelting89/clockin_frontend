@@ -1,24 +1,6 @@
-import axios from 'axios'
+import axios from "axios";
 
-const state = {
-    token: null,
-    register: false,
-    loggedIn: false
-}
-
-const mutations = {
-    SET_TOKEN (state, token) {
-        state.token = token;
-    },
-    LOGGED_IN(state) {
-        state.loggedIn = true
-    },
-    REGISTER (state) {
-        state.register = true
-    }
-}
-
-const actions = {
+export const actions = {
     setLoggedIn( { commit }) {
         commit('LOGGED_IN');
     },
@@ -57,29 +39,29 @@ const actions = {
         let token = localStorage.getItem('token');
         let data = {};
 
-        axios.post("http://localhost:8886/api/v1/testendpoint", data, {
-            headers: {
-                'Content-Type' : 'application/x-www-form-urlencoded',
-                'Authorization': `Bearer ${token}`,
-                'Access-Control-Allow-Origin' : '*',
-                'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-            },
-        })
+        const header = {
+            'Content-Type' : 'application/x-www-form-urlencoded',
+            'Authorization': `Bearer ${token}`,
+            'Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        }
 
+        axios.post("http://localhost:8886/api/v1/testendpoint", data, {
+            headers: header
+        });
+    },
+    getGetDataFromSpring() {
+        let token = localStorage.getItem('token');
+
+        const header = {
+            'Content-Type' : 'application/x-www-form-urlencoded',
+            'Authorization': `Bearer ${token}`,
+            'Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        }
+
+        axios.get("http://localhost:8886/api/v1/testGet", {
+            headers: header
+        });
     }
 }
-
-const getters = {
-    token: state => state.token,
-    register: state => state.register,
-    loggedIn: state => state.loggedIn
-}
-
-const authModule = {
-    state,
-    mutations,
-    actions,
-    getters
-}
-
-export default authModule;
