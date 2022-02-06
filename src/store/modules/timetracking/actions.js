@@ -48,7 +48,21 @@ export const actions = {
         return axios.get("http://localhost:8886/api/v1/timetrack/get", {
             headers: header
         }).then((response) => {
-            commit('UPDATE_TIME_TRACKING', response.data);
+
+            const timeData = [];
+
+            response.data.forEach((value) => {
+
+                const timeItem = {
+                    'start': new Date(value.start),
+                    'end': new Date(value.end),
+                    'id': value.id
+                }
+
+                timeData.push(timeItem);
+            });
+
+            commit('UPDATE_TIME_TRACKING', timeData);
         });
     }
 }

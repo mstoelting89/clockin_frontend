@@ -6,7 +6,11 @@
     <input type="button" class="btn btn-primary" value="Get" @click="getTimeTracking">
   </div>
   <div class="row" v-for="timeTrackingItem in showTimeTrackingData" :key="timeTrackingItem.id">
-    {{ timeTrackingItem.id }}: {{ timeTrackingItem.start }} - {{ timeTrackingItem.end }}
+    {{ timeTrackingItem.id }}:
+    {{ timeTrackingItem.start.getDate() }}.{{ timeTrackingItem.start.getMonth() + 1 }}.{{ timeTrackingItem.start.getFullYear() }}
+    {{ timeTrackingItem.start.getHours() }}:{{ timeTrackingItem.start.getMinutes()}} -
+    {{ timeTrackingItem.end.getHours() }}:{{ timeTrackingItem.end.getMinutes() }}
+
   </div>
 </template>
 
