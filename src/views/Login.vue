@@ -46,7 +46,7 @@ export default {
       this.$store
           .dispatch("login", {email, password})
           .then(() => {
-            this.$router.push('/loginarea');
+            this.$router.push('/user/loginarea');
           })
     }
   }

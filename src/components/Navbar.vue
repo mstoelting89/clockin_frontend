@@ -11,13 +11,14 @@
             <router-link to="/" class="nav-link active">Home</router-link>
           </li>
           <li class="nav-item" v-if="checkLogin">
-            <router-link to="/loginarea" class="nav-link">Loginarea</router-link>
+            <router-link to="/user/loginarea" class="nav-link">Loginarea</router-link>
+          </li>
+          <li class="nav-item" v-if="checkLogin">
+            <router-link to="/admin" class="nav-link">Adminarea</router-link>
           </li>
         </ul>
         <form class="container-fluid justify-content-end d-flex">
-          <button class="btn btn-primary me-3" v-if="!checkLogin">
-            <router-link to="/register">Registrieren</router-link>
-          </button>
+
           <div class="login-btn" >
             <button class="btn btn-primary me-3"  v-if="!checkLogin">
               <router-link to="/login">Login</router-link>

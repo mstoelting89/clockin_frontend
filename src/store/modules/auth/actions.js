@@ -23,6 +23,12 @@ export const actions = {
 
         return axios.post("http://localhost:8886/api/v1/login", data, header)
             .then((response) => {
+                const userRoles = [];
+                response.data.role.forEach((role) => {
+                    userRoles.push(role.authority);
+                });
+
+                localStorage.setItem('userRole', userRoles);
                 localStorage.setItem('token', response.data.token);
                 commit('SET_TOKEN', response.data.token);
                 commit('LOGGED_IN')
