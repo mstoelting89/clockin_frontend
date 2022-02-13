@@ -11,7 +11,7 @@
             <router-link to="/" class="nav-link active">Home</router-link>
           </li>
           <li class="nav-item" v-if="checkLogin">
-            <router-link to="/user/loginarea" class="nav-link">Loginarea</router-link>
+            <router-link to="/user/timetracking" class="nav-link">Timetracking</router-link>
           </li>
           <li class="nav-item" v-if="checkLogin">
             <router-link to="/admin" class="nav-link">Adminarea</router-link>

@@ -17,9 +17,8 @@
             </div>
             <div class="mb-3">
               <input type="button" class="btn btn-primary me-5" id="send" @click="signIn(emailValue, passwordValue)" value="Login">
-              <a href="#">Passwort vergessen</a>
+              <router-link to="/login/forgotpassword">Passwort vergessen</router-link>
             </div>
-
           </form>
         </div>
         <div class="col">
@@ -44,10 +43,7 @@ export default {
   methods: {
     signIn(email, password) {
       this.$store
-          .dispatch("login", {email, password})
-          .then(() => {
-            this.$router.push('/user/loginarea');
-          })
+          .dispatch("login", {email, password});
     }
   }
 }

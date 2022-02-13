@@ -9,11 +9,11 @@
           <form ref="registerForm">
             <div class="mb-3">
               <label for="firstName" class="form-label">Vorname</label>
-              <input type="firstName" class="form-control" id="firstName" v-model="firstName">
+              <input type="text" class="form-control" id="firstName">
             </div>
             <div class="mb-3">
               <label for="lastName" class="form-label">Nachname</label>
-              <input type="lastName" class="form-control" id="lastName" v-model="lastName">
+              <input type="text" class="form-control" id="lastName">
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
@@ -37,6 +37,8 @@
 
 <script>
 
+import auth from "@/services/auth";
+
 export default {
   name: "register",
   methods: {
@@ -48,8 +50,7 @@ export default {
         "password": this.$refs.registerForm.elements.password.value
       }
 
-      this.$store
-          .dispatch("register", registerData)
+      auth.register(registerData)
           .then(() => this.$router.push('/login'))
     }
   }

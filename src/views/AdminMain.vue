@@ -2,10 +2,10 @@
   <div class="admin-area">
     <h1>Dies ist der Adminbereich</h1>
     <button class="btn btn-primary me-3">
-      <router-link to="/admin/administration" class="nav-link">Verwaltung</router-link>
+      <router-link to="/admin/administration">Verwaltung</router-link>
     </button>
     <button class="btn btn-primary me-3">
-      <router-link to="/admin/register" class="nav-link">Nutzer registrieren</router-link>
+      <router-link to="/admin/register">Nutzer registrieren</router-link>
     </button>
     <router-view></router-view>
   </div>

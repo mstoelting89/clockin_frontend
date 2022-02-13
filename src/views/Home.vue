@@ -6,7 +6,7 @@
 
 <script>
 
-import LandingPage from "@/components/LandingPage";
+import LandingPage from "@/components/LandingPage/LandingPage";
 
 export default {
   name: 'Home',

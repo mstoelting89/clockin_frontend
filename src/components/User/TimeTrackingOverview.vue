@@ -1,5 +1,5 @@
 <template>
-  <div class="loginArea">
+  <div class="timetracking-overview">
     <h1>Dies ist der Loginbereich</h1>
     <input type="button" class="btn btn-primary" value="Start" @click="startTimeTracking">
     <input type="button" class="btn btn-primary" value="Ende" @click="endTimeTracking">
@@ -17,7 +17,7 @@
 <script>
 
 export default {
-  name: "LoginStart",
+  name: "TimeTrackingOverview",
   created() {
     this.$store.dispatch('getTimeTracking');
   },

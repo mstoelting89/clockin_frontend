@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import Register from "@/views/Register";
-import Login from "@/views/Login";
-import LoginArea from "@/views/LoginArea";
+import Register from "@/components/Admin/Register";
+import Login from "@/components/Login/Login";
+import TimeTrackingOverview from "@/components/User/TimeTrackingOverview";
 import Unauthorized from "@/views/Unauthorized";
-import AdminVerwaltung from "@/views/AdminVerwaltung";
+import Verwaltung from "@/components/Admin/Verwaltung";
 import AdminMain from "@/views/AdminMain";
+import ForgotPassword from "@/components/Login/ForgotPassword";
+import UserMain from "@/views/UserMain";
 
 const routes = [
   {
@@ -16,18 +18,31 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
   },
   {
-    path: '/:user+',
-    beforeEnter: () => {
-      console.log("Foo");
-    }
+    path: '/login/forgotpassword',
+    name: 'forgotpassword',
+    component: ForgotPassword
   },
   {
-    path: '/user/loginarea',
-    name: 'LoginArea',
-    component: LoginArea
+    path: '/user/',
+    beforeEnter: (to, from, next) => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        next();
+      } else {
+        next('/401');
+      }
+    },
+    component: UserMain,
+    children: [
+      {
+        path: 'timetracking',
+        name: 'timetracking',
+        component: TimeTrackingOverview
+      }
+    ]
   },
   {
     path: '/401',
@@ -39,10 +54,11 @@ const routes = [
     component: AdminMain,
     beforeEnter: (to, from, next) => {
       const userRole = localStorage.getItem('userRole');
-      if (userRole !== "ROLE_ADMIN") {
-        next('/401');
-      } else {
+      const token = localStorage.getItem('token');
+      if (userRole === "ROLE_ADMIN" && token) {
         next();
+      } else {
+        next('/401');
       }
     },
     children:[
@@ -54,7 +70,7 @@ const routes = [
       {
         path: 'administration',
         name: 'AdminVerwaltung',
-        component: AdminVerwaltung,
+        component: Verwaltung,
       }
     ]
   }
@@ -64,16 +80,16 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
-
+/*
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token');
   if (token && to.path === '/login') {
-    next('/user/loginarea')
-  } else if (!token && to.path !== '/login' && to.path !== '/') {
+    next('/user/loginarea');
+  } else if (!token && to.path !== '/login' && to.path !== '/' && to.path !== '/forgotpassword') {
     next('/login');
   } else {
     next();
   }
-})
+}) */
 
-export default router
+export default router;
