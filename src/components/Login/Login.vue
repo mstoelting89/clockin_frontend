@@ -22,6 +22,7 @@
           </form>
         </div>
         <div class="col">
+          Foo
         </div>
       </div>
 
