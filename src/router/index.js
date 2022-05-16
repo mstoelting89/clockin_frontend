@@ -80,16 +80,5 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
-/*
-router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('token');
-  if (token && to.path === '/login') {
-    next('/user/loginarea');
-  } else if (!token && to.path !== '/login' && to.path !== '/' && to.path !== '/forgotpassword') {
-    next('/login');
-  } else {
-    next();
-  }
-}) */
 
 export default router;

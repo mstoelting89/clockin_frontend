@@ -6,6 +6,7 @@ export const actions = {
         commit('LOGGED_IN');
     },
     login({ commit }, data) {
+        // TODO: Test to implement a return
         auth.login(data)
             .then((response) => {
                 const userRoles = [];
@@ -18,7 +19,13 @@ export const actions = {
                 commit('SET_TOKEN', response.data.token);
                 commit('LOGGED_IN');
                 router.push('/user/timetracking');
-            });
+
+            })
+            .catch((error) => {
+                if (error.response) {
+                    console.log(error.response.status);
+                }
+            })
     },
     logout() {
         return new Promise((resolve) => {
